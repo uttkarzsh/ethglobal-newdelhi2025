@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.30;
 
-import {Script} from "forge-std/Script.sol";
+import { Script } from "forge-std/Script.sol";
 import {SubscriptionManager} from "../src/SubscriptionManager.sol";
 
-contract CounterScript is Script {
+contract SubscriptionScript is Script {
     SubscriptionManager public subscriptionManager;
 
     function setUp() public {}

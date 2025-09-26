@@ -1,0 +1,3 @@
+[submodule "subzkrippy-core/contract/lib/openzeppelin-contracts"]
+	path = subzkrippy-core/contract/lib/openzeppelin-contracts
+	url = https://github.com/openzeppelin/openzeppelin-contracts

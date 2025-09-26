@@ -13,6 +13,7 @@ contract SubscriptionManager {
     mapping(bytes32 => Plan) public plans;
     error SubscriptionManager_PlanAlreadyExists();
     error SubscriptionManager_PlanDoesNotExist();
+    error SubscriptionManager_SubscriptionInactive();
 
     struct Subscription {
         bytes32 proofHash;
@@ -53,5 +54,24 @@ contract SubscriptionManager {
             endTime: endTime,
             active: true
         });
+    }
+
+    function renewSubscription(bytes32 planId, bytes32 userId, bytes32 newProofHash) external {
+        Plan memory plan = plans[planId];
+        if(!plan.exists){
+            revert SubscriptionManager_PlanDoesNotExist();
+        }
+        
+        Subscription storage sub = subscriptions[planId][userId];
+
+        if(!sub.active){
+            revert SubscriptionManager_SubscriptionInactive();
+        }
+
+        uint256 currentEnd = sub.endTime;
+        uint256 newEndTime = block.timestamp > currentEnd ? block.timestamp + plan.duration : currentEnd + plan.duration;
+
+        sub.endTime = newEndTime;
+        sub.proofHash = newProofHash;
     }
 }
