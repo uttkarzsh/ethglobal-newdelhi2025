@@ -56,6 +56,10 @@ contract SubscriptionManager {
         });
     }
 
+    function hasActiveSubscription(bytes32 planId, bytes32 userId) external view returns(bool){
+        return subscriptions[planId][userId].active;
+    }
+
     function renewSubscription(bytes32 planId, bytes32 userId, bytes32 newProofHash) external {
         Plan memory plan = plans[planId];
         if(!plan.exists){
