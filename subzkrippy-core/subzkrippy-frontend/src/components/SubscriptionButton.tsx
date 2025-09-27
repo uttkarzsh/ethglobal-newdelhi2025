@@ -1,63 +1,31 @@
-import { useState, useEffect } from "react";
 import { useAccount, useWriteContract } from "wagmi";
-import { abi_fundmanager } from "../utils/abi";
 import { FUNDS_CONTRACT } from "../utils/constants";
+import { abi_fundmanager } from "../utils/abi";
 
-export default function SubscriptionButton() {
-  const { address, isConnected } = useAccount();
-  // State for form inputs
-  const [formData, setFormData] = useState({
-    planId: "",
-    amount: "",
-  });
+interface Props {
+  planId: string;
+  amount: string;
+}
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    setFormData({
-      planId: params.get("planId") || "",
-      amount: params.get("amount") || "",
-    });
-  }, []);
-
-  // Handle input change
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  // Wagmi contract write hook
+export default function SubscriptionButton({ planId, amount }: Props) {
+  const { isConnected } = useAccount();
   const { writeContract } = useWriteContract();
 
-  if (!isConnected) {
-    return <p>Please connect your wallet</p>;
-  }
+  if (!isConnected) return <p className="text-yellow-400 font-bold">Please connect your wallet</p>;
 
   return (
-    <form>
-      <input
-        name="planId"
-        value={formData.planId}
-        onChange={handleChange}
-        placeholder="planId"
-      />
-      <input
-        name="amount"
-        value={formData.amount}
-        onChange={handleChange}
-        placeholder="amount"
-      />
-      <button
-        onClick={() =>
-          writeContract({
-            address: FUNDS_CONTRACT,
-            abi: abi_fundmanager,
-            functionName: "addFunds",
-            args: [formData.planId, formData.amount],
-          })
-        }
-      >
-        Subscribe
-      </button>
-    </form>
+    <button
+      onClick={() =>
+        writeContract({
+          address: FUNDS_CONTRACT,
+          abi: abi_fundmanager,
+          functionName: "addFunds",
+          args: [planId, amount],
+        })
+      }
+      className="bg-gradient-to-r from-green-400 to-blue-500 hover:scale-105 transition-transform p-3 rounded-xl font-bold shadow-lg"
+    >
+      Subscribe
+    </button>
   );
 }
