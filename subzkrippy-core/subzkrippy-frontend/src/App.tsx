@@ -4,6 +4,7 @@ import MerchantDashboard from "./pages/MerchantDashboard";
 import Subscription from "./pages/Subscription";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import PaymentPage from "./pages/PaymentPage";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/merchant" element={<MerchantDashboard />} />
             <Route path="/subscription" element={<Subscription />} />
+            <Route path="/payment" element={<PaymentPage/>} />
           </Routes>
         </main>
         <Footer />
