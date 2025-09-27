@@ -1,9 +1,7 @@
 
 
 const SubscribeButton = () => {
-  const handleSubscribe = () => {
-    const merchantId = "foxo";
-    const amount = 1; 
+  const handleSubscribe = () => { 
     window.location.href = `http://localhost:5174/payment`;
   };
 
