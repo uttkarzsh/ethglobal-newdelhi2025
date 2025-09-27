@@ -1,7 +1,8 @@
+import SubscriptionButton from "../components/SubscriptionButton"
 
 const PaymentPage = () => {
   return (
-    <div>PaymentPage</div>
+    <SubscriptionButton />
   )
 }
 

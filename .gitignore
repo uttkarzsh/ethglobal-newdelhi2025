@@ -2,3 +2,4 @@ subzkrippy-core/contract/lib/forge-std
 subzkrippy-core/contract/lib/openzeppelin-contracts/
 subzkrippy-core/contract/out
 subzkrippy-core/contract/cache
+subzkrippy-core/subzkrippy-backend/node_modules/
