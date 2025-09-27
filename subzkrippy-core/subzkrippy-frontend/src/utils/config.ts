@@ -1,15 +1,14 @@
 import { http, createConfig } from "wagmi";
-import { polygonAmoy } from "wagmi/chains";
-import { injected } from "wagmi";
+import { flowTestnet } from "wagmi/chains";
+
 
 const rpcUrl = "";
 
 export const config = createConfig({
-    chains: [polygonAmoy],
+    chains: [flowTestnet],
     connectors: [
-      injected()
     ],
     transports: {
-        [polygonAmoy.id]: http(rpcUrl)
+        [flowTestnet.id]: http(rpcUrl)
     }
 })

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Connect from "./Connect";
 
 const Header = () => {
   return (
@@ -8,6 +9,7 @@ const Header = () => {
         <Link to="/">Home</Link>
         <Link to="/subscription">Subscribe</Link>
         <Link to="/merchant">Merchant</Link>
+        <Connect />
       </nav>
     </header>
   );
