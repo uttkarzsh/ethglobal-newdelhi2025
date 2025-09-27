@@ -2,9 +2,10 @@
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": ["react", "react-dom"],
+    "types": ["react", "react-dom","vite/client"],
     "jsx": "react-jsx", 
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "module": "ESNext",
     "skipLibCheck": true,
     "esModuleInterop": true,

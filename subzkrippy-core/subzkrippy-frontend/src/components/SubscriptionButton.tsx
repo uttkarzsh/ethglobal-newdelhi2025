@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useAccount, useWriteContract } from "wagmi";
 import { abi_fundmanager } from "../utils/abi";
 import { FUNDS_CONTRACT } from "../utils/constants";
+import { generateProof } from "../utils/generateProof";
 
 export default function SubscriptionButton() {
   const { address, isConnected } = useAccount();
@@ -31,6 +32,21 @@ export default function SubscriptionButton() {
   if (!isConnected) {
     return <p>Please connect your wallet</p>;
   }
+  const handleClick = async () => {
+  try {
+
+    writeContract({
+     address: FUNDS_CONTRACT,
+     abi: abi_fundmanager,
+     functionName: "addFunds",
+     args: [formData.planId, formData.amount],
+   });
+
+    console.log("Contract call completed");
+  } catch (err) {
+    console.error("Error:", err);
+  }
+};
 
   return (
     <form>
@@ -47,14 +63,7 @@ export default function SubscriptionButton() {
         placeholder="amount"
       />
       <button
-        onClick={() =>
-          writeContract({
-            address: FUNDS_CONTRACT,
-            abi: abi_fundmanager,
-            functionName: "addFunds",
-            args: [formData.planId, formData.amount],
-          })
-        }
+        onClick={handleClick}
       >
         Subscribe
       </button>
